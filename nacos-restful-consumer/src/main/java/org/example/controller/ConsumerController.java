@@ -49,7 +49,7 @@ public class ConsumerController {
         URI uri = choose.getUri();
         //调用服务
         String result = new RestTemplate().getForObject(uri+"/server", String.class);
-
+        System.out.println("调用的服务URI---"+uri);
         return "Consumer invoke success  "+result;
     }
 }

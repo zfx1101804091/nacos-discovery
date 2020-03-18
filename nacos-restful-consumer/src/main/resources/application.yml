@@ -8,3 +8,8 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 #服务发现中心地址
+      
+# 负载均衡策略 RoundRobinRule(默认):轮询，即按一定的顺序轮换获取实例的地址
+nacos-restful-provider: #调用的服务名
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机，即以随机的方式获取实例的地址。
