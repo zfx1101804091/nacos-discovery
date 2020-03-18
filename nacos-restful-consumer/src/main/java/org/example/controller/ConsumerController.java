@@ -1,7 +1,8 @@
 package org.example.controller;
 
+import com.zfx.dubbo.service.Server1Api;
+import com.zfx.dubbo.service.Server2Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,13 @@ public class ConsumerController {
     @Autowired
     LoadBalancerClient loadBalancerClient;
     
+    //通过dubbo服务注入
+    @org.apache.dubbo.config.annotation.Reference
+    Server2Api server2Api;
+    
+    @org.apache.dubbo.config.annotation.Reference
+    Server1Api server1Api;
+    
    /* @GetMapping(value = "/server")
     public String server(){
         String url = "http://"+provider+"/server";
@@ -51,5 +59,18 @@ public class ConsumerController {
         String result = new RestTemplate().getForObject(uri+"/server", String.class);
         System.out.println("调用的服务URI---"+uri);
         return "Consumer invoke success  "+result;
+    }
+    
+    @GetMapping(value="/server2")
+    public String dubboServer(){
+        String server2 = server2Api.dubboServer2();
+        return "dubbo服务调用----"+server2;
+    }
+
+
+    @GetMapping(value="/server3")
+    public String dubboServer3(){
+        String server2 = server1Api.dubboServer1();
+        return "dubbo服务调用----"+server2;
     }
 }
