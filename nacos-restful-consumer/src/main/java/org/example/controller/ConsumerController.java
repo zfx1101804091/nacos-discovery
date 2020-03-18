@@ -3,8 +3,10 @@ package org.example.controller;
 import com.zfx.dubbo.service.Server1Api;
 import com.zfx.dubbo.service.Server2Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -72,5 +74,29 @@ public class ConsumerController {
     public String dubboServer3(){
         String server2 = server1Api.dubboServer1();
         return "dubbo服务调用----"+server2;
+    }
+    
+    /*
+     * 功能描述: 
+     *   TODO 注意：要使用配置中心就要在bootstrap.yml中来配置，bootstrap.yml配置文件的加载顺序要比application.yml要 优先。
+     *    @Value注解不具备实时更新配置（这里可以使用配置文件上下文ConfigurableApplicationContext实时获取） 
+     * @Param: 
+     * @Return: 
+     * @Author: Administrator
+     * @Date: 2020/3/19 0019 0:01
+     */
+    
+    @Value("${common.name}")
+    private String commonName;
+    
+    @Autowired
+    ConfigurableApplicationContext configurableApplicationContext;
+    
+    //配置中心使用
+    @GetMapping(value="/config")
+    public String config(){
+        //return commonName;
+        String property = configurableApplicationContext.getEnvironment().getProperty("common.name");
+        return "common.name: "+property;
     }
 }

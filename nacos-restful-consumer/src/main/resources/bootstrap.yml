@@ -9,6 +9,10 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848 #服务发现中心地址
         namespace: zhengfx-test # 开发环境
+      config:
+        server-addr: 127.0.0.1:8848 #服务配置中心地址
+        file-extension: yaml #指定配置文件的扩展名配置文件名称根据application.name的名称加扩展名拼装为nacos-restful-consumer.yaml
+        group: DEFAULT_GROUP
 
 # 负载均衡策略 RoundRobinRule(默认):轮询，即按一定的顺序轮换获取实例的地址
 nacos-restful-provider: #调用的服务名
