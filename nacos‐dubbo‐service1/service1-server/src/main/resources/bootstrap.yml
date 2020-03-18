@@ -10,6 +10,7 @@ spring:
     nacos:
       discovery:
         server‐addr: 127.0.0.1:8848
+        namespace: zhengfx-test # 开发环境
 dubbo:
   scan: # dubbo 服务扫描基准包
     base‐packages: com.zfx.dubbo.service
