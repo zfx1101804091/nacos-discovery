@@ -99,4 +99,11 @@ public class ConsumerController {
         String property = configurableApplicationContext.getEnvironment().getProperty("common.name");
         return "common.name: "+property;
     }
+
+    @GetMapping(value="/config2")
+    public String config2(){
+        String name = configurableApplicationContext.getEnvironment().getProperty("common.name");
+        String addr = configurableApplicationContext.getEnvironment().getProperty("common.addr");
+        return "common.name: "+name+" | "+addr;
+    }
 }
