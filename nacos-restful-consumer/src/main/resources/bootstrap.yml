@@ -22,6 +22,10 @@ spring:
           data-id: ext-config-common02.yaml
           group: ZFX_GROUP
           refresh: true
+        ext-config[2]:
+          data-id: ext-config-http.yaml
+          group: ZFX_GROUP
+          refresh: true
        
 
 # 负载均衡策略 RoundRobinRule(默认):轮询，即按一定的顺序轮换获取实例的地址
